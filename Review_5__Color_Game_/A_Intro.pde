@@ -1,22 +1,26 @@
 void intro () {
-  // DECORATION
-  textSize(30);
-  background(0, 255, 0);
-  fill(255,255,255);
-  text("COLOR GAME", width/2-100, height/2-200);
-  fill(0);
-  text("COLOR GAME", width/2-98, height/2-198);
+  size(800, 800);
 
-  // PLAY
-  stroke(255, 150, 30);
-  strokeWeight(5);
-  fill(0);
-  text("Click anywhere to play", width/2-160, height/2+100);
+  // timer and score
+  score = 0;
+  countdowntimer = 120;
+  w = int(random(0, 6));
+  c = int(random(0, 6));
+
+  //gif
+  int i = 7;
+  println(f);
+  image(gif[f], 0, 0, width, height);
+
+  //mod
+  if (frameCount % 2 == 0) f = f + 1; 
+  if (f == numberOfFrames) f = 0;
   fill(255);
-  text("Click anywhere to play", width/2-158, height/2+98);
+  textAlign(CENTER, CENTER);
+  textSize(50);
+  text("Colour Game", width/2, height/2);
 }
 
-void introClicks () {
-  if (mouseX > 0 && mouseX < 800 && mouseY > 0 && mouseY < 800)
-    mode = GAME;
+void introClicks() {
+  mode = GAME;
 }
