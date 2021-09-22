@@ -1,34 +1,66 @@
-void game () {
-  // DECORATION
-  strokeWeight(0);
+void game() {
+  size(800, 800);
+  
+  // MATCH
+  fill(255);
+  rect(0, 0, 400, 800);
+  // NO MATCH
+  fill(0);
+  rect(400, 0, 400, 800);
+  
+  //Score
   textSize(30);
-  fill(255);
-
-  // Match
+  fill (0);
+  text("MATCH", 200, 400);
   fill (255);
-  rect (0, 0, 400, 800);
+  text("NO MATCH", 600, 400);
+  
+  //colours
+  fill(colors[c]);
+  textSize(countdowntimer);
+  text(words[w], 400, 200);
+  textSize(30);
+  text("Score:" + score, width/2, 700);
 
-  // False
-  fill (0);
-  rect (400, 0, 400, 800);
-
-  fill (0);
-  text("MATCH", width/2-250, height/2-200);
-  fill(255);
-  text("NO MATCH", width/2+130, height/2-200);
-
-  // GAME
-
-  // Timer display
-
-  // Word and Color
-  w = int (random (0, 6));
-  c = int (random (0, 6));
-  fill (colors[c]);
-  text (words[w], width/2, height/2);
+  //COUNTDOWN TIMER
+  countdowntimer = countdowntimer - 1;
+  if (countdowntimer == 0) {
+    mode = ALTERNATEGAMEOVER; 
+  }
+}
+void gameClicks() {
+  if (mouseX<width/2) {
+    //match
+    if (w==c) {
+      cc = int(random(2, 4));     
+      countdowntimer = 120;
+      score = score +1;
+      if (cc>=3) {
+        w = int(random(0, 6));
+        c = w;
+      } else {
+        w = int(random(0, 6));
+        c = int(random(0, 6));
+      }
+    } else {
+      mode = GAMEOVER;
+    }
+    //nomatch
+  } else {
+    if (w==c) {
+      mode = GAMEOVER;
+    } else {
+      c = int(random(2, 4));
+      countdowntimer = 120;
+      score = score +1;
+      if (cc>=3) {
+        w = int(random(0, 6));
+        c = w;
+      } else {
+        w = int(random(0, 6));
+        c = int(random(0, 6));
+      }
+    }
+  }
 }
 
-void gameClicks () {
-  if (mouseX > 0 && mouseX < 800 && mouseY > 0 && mouseY < 800)
-    mode = GAMEOVER;
-}
